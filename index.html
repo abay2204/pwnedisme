@@ -79,162 +79,76 @@
         
         <div class="col s8">
         <b:section class='main' id='main' showaddelement='no'>
-            <b:widget id='Blog1' locked='true' title='Posting Blog' type='Blog'>
-                <b:includable id='main' var='top'>
-                    <b:if cond='!data:mobile'>
-    <!-- posts -->
-    <div class='blog-posts hfeed'>
-
-
-      <b:loop values='data:posts' var='post'>
-        <b:if cond='data:post.isDateStart and not data:post.isFirstPost'>
-          &lt;/div&gt;&lt;/div&gt;
-        </b:if>
-        <b:if cond='data:post.isDateStart'>
-          &lt;div class=&quot;date-outer&quot;&gt;
-        </b:if>
-        <b:if cond='data:post.dateHeader'>
-          <h2 class='date-header'><span><data:post.dateHeader/></span></h2>
-        </b:if>
-        <b:if cond='data:post.isDateStart'>
-          &lt;div class=&quot;date-posts&quot;&gt;
-        </b:if>
-        <div class='post-outer'>
-          
-        </div>
-
-        <!-- Ad -->
-        <b:if cond='data:post.includeAd'>
-          <div class='inline-ad'>
-            <data:adCode/>
-          </div>
-        </b:if>
-      </b:loop>
-      <b:if cond='data:numPosts != 0'>
-        &lt;/div&gt;&lt;/div&gt;
-      </b:if>
-    </div>
-
-    <!-- navigation -->
-    
-  <b:else/>
-    
-  </b:if>
-
-  
-                </b:includable>
-            </b:widget>
-            
-        </b:section>            
-<b:includable id='mobile-post' var='post'>
-  <div class='date-outer'>
-    <b:if cond='data:post.dateHeader'>
-      <h2 class='date-header'><span><data:post.dateHeader/></span></h2>
-    </b:if>
-    <div class='date-posts'>
-      <div class='post-outer'>
-
-        <div class='post hentry uncustomized-post-template' itemscope='itemscope' itemtype='http://schema.org/BlogPosting'>
-          <b:if cond='data:post.thumbnailUrl'>
-            <meta expr:content='data:post.thumbnailUrl' itemprop='image_url'/>
-          </b:if>
-          <meta expr:content='data:blog.blogId' itemprop='blogId'/>
-          <meta expr:content='data:post.id' itemprop='postId'/>
-
-          <a expr:name='data:post.id'/>
-          <b:if cond='data:post.title'>
-            <h3 class='post-title entry-title' itemprop='name'>
-              <b:if cond='data:post.link'>
-                <a expr:href='data:post.link'><data:post.title/></a>
-              <b:elseif cond='data:post.url and data:blog.url != data:post.url'/>
-                <a expr:href='data:post.url'><data:post.title/></a>
-              <b:else/>
-                <data:post.title/>
-              </b:if>
-            </h3>
-          </b:if>
-
-          <div class='post-header'>
-            <div class='post-header-line-1'/>
-          </div>
-
-          <div class='post-body entry-content' expr:id='&quot;post-body-&quot; + data:post.id' itemprop='articleBody'>
-            <data:post.body/>
-            <div style='clear: both;'/> <!-- clear for photos floats -->
-          </div>
-
-          <div class='post-footer'>
-            <div class='post-footer-line post-footer-line-1'>
-              <span class='post-author vcard'>
-                <b:if cond='data:top.showAuthor'>
-                  <b:if cond='data:post.authorProfileUrl'>
-                    <span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
-                      <meta expr:content='data:post.authorProfileUrl' itemprop='url'/>
-                      <a expr:href='data:post.authorProfileUrl' rel='author' title='author profile'>
-                        <span itemprop='name'><data:post.author/></span>
-                      </a>
-                    </span>
-                  <b:else/>
-                    <span class='fn' itemprop='author' itemscope='itemscope' itemtype='http://schema.org/Person'>
-                      <span itemprop='name'><data:post.author/></span>
-                    </span>
-                  </b:if>
-                </b:if>
-              </span>
-
-              <span class='post-timestamp'>
-                <b:if cond='data:top.showTimestamp'>
-                  <data:top.timestampLabel/>
-                  <b:if cond='data:post.url'>
-                    <meta expr:content='data:post.url.canonical' itemprop='url'/>
-                    <a class='timestamp-link' expr:href='data:post.url' rel='bookmark' title='permanent link'><abbr class='published' expr:title='data:post.timestampISO8601' itemprop='datePublished'><data:post.timestamp/></abbr></a>
-                  </b:if>
-                </b:if>
-              </span>
-
-            </div>
-
-            <div class='post-footer-line post-footer-line-2'>
-              <b:if cond='data:top.showMobileShare'>
-                <div class='mobile-link-button goog-inline-block' id='mobile-share-button'>
-                  <a href='javascript:void(0);'><data:shareMsg/></a>
+            <b:widget id='Blog1' locked='true' title='Postingan Blog' type='Blog'>
+              <b:includable id='main'>
+              <b:loop values='data:posts' var='post'>
+                <div class="card horizontal hoverable">
+                  <div class="card-image">
+                    <img src="http://lorempixel.com/200/190/nature/6"/>
+                  </div>
+                  <div class="card-stacked">
+                    <div class="card-content">          
+                      <span class="card-title activator grey-text text-darken-4"><data:post.title/><i class="icon right ion-android-more-vertical"></i></span>
+                    </div>
+                    <div class="card-action">
+                      <a expr:href="data:post.url">Read More</a>
+                    </div>        
+                  </div>
+                  <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4"><data:post.title/><i class="icon right ion-close-round"></i></span>
+                  <p>
+                  <b:if cond='data:blog.pageType != &quot;item&quot;'>
+<b:if cond='data:blog.pageType != &quot;static_page&quot;'>
+<div>
+<b:if cond='data:post.thumbnailUrl'>
+<img class='post-thumbnail' expr:alt='data:post.title' expr:src='data:post.thumbnailUrl' width='72px' height='72px'/>
+</b:if>
+<data:post.snippet/>
+</div>
+<div class='jump-link'>
+<a expr:href='data:post.url' expr:title='data:post.title'><data:post.jumpText/></a>
+</div>
+<b:else/>
+<data:post.body/>
+</b:if>
+<b:else/>
+<data:post.body/>
+</b:if>
+                  </p>      
                 </div>
-              </b:if>
-              <b:if cond='data:top.showDummy'>
-                <div class='goog-inline-block dummy-container'><data:post.dummyTag/></div>
-              </b:if>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </div>
-</b:includable>
-        
-    <div class="card horizontal hoverable">
-      <div class="card-image">
-        <img src="http://lorempixel.com/200/190/nature/6"/>
-      </div>
-      <div class="card-stacked">
-        <div class="card-content">          
-          <span class="card-title activator grey-text text-darken-4">Card Title<i class="icon right ion-android-more-vertical"></i></span>
-        </div>
-        <div class="card-action">
-          <a href="#">This is a link</a>
-        </div>        
-      </div>
-      <div class="card-reveal">
-      <span class="card-title grey-text text-darken-4">Card Title<i class="icon right ion-close-round"></i></span>
-      <p>Here is some more information about this product that is only revealed once clicked on. </p>      
-    </div>
-    </div>    
+                </div>    
+              </b:loop>
+                
+                <data:content/>
+                    
+              </b:includable>
+              
+            </b:widget>                
+    
+            
+        </b:section>
 
         </div>
         <div class="col s4">
             <aside id="sidebar" class="col s12">                
-                <b:section class='sidebar' id='sidebar' showaddelement='yes'></b:section>
+                <b:section class='sidebar' id='sidebar' showaddelement='yes'>
+                    <b:widget id='HTML1' type='HTML' locked='yes' title='Labels'>
+                        <b:includable id='main'>
+                        <div class="card-panel teal white-text">
+                          <data:title/>
+                        </div>
+                        <data:content/>
+                           
+                        </b:includable>
+                        <b:includable id='labels'>
+                            <ul>
+                                <li><a href='#' title='PHP'>PHP</a></li>
+                                <li><a href='#' title='Java'>Java</a></li>
+                                <li><a href='#' title='CPP'>CPP</a></li>
+                            </ul>
+                        </b:includable>
+                    </b:widget>
+                </b:section>
             </aside>
             <div class="col s12">
                 <div class="card-panel teal white-text">
